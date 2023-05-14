@@ -1,0 +1,8 @@
+{
+    "access_token": "v3.r.137548679.8e022c9e06ee6e7da70a15bebaf56e04346d6af4.03533685c08712faceee979142823b6f93cacfe4",
+    "refresh_token": "v3.r.137548679.8eb3e03f998e7f702cd62b36144fc90a3454be50.5c60711f63c84e83998814f8c29dd0e68803a997",
+    "ttl": 1684618453,
+    "expires_in": 604800,
+    "token_type": "Bearer",
+    "reg_user_resumes_count": 0
+}
