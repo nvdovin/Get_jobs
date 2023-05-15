@@ -20,6 +20,9 @@ class DataAnalise(ABC):
     def compare_by_param(self, param):
         pass
 
+    def output_top(self, top_size):
+        pass
+
 
 class UserActions(ABC):
     @abstractmethod
