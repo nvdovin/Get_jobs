@@ -1,12 +1,9 @@
-import json
-import os
 from abstract_class import GeneralData
 import requests
-from get_api.superjobs_api import by_password
 
 
 class HeadHunter(GeneralData):
-    def __init__(self, response_text):
+    def __init__(self, response_text: str):
         self.response_text = response_text
         self.url = "https://api.hh.ru/vacancies"
 
@@ -25,18 +22,18 @@ class HeadHunter(GeneralData):
 
 
 class SuperJob(GeneralData):
-    def __init__(self, keyword):
+    def __init__(self, keyword: str):
         self.keyword = keyword
-        self.access_token = os.getenv("SJ_ACCESS_TOKEN")
-        self.secret_key = os.getenv("SJ_SECRET_KEY")
+        self.secret_key = "v3.r.137548679.e52320967352ba00b5012258aae81413a76d0fbb.49831d30dacf09d700882a6b684a49a5d518d66e"
 
     def get_main_data(self):
         data = requests.get(
             "https://api.superjob.ru/2.0/vacancies/",
-            params={"keyword": self.keyword},
+            params={"keyword": self.keyword,
+                    "order_field": "payment"},
             headers={"X-Api-App-Id": self.secret_key}
         )
-        return data
+        return data.json()
 
     def __str__(self):
         return f"{self.get_main_data().text}"
