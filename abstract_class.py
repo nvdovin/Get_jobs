@@ -24,16 +24,12 @@ class DataAnalise(ABC):
         pass
 
 
-class UserActions(ABC):
-    @abstractmethod
+class GeneralData(ABC):
     def get_user_response(self):
         pass
 
     def get_users_action(self):
         pass
 
-
-class GeneralData(ABC):
-    @abstractmethod
     def get_main_data(self):
         pass
