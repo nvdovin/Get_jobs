@@ -1,7 +1,7 @@
-from abstract_class import UserActions
+from abstract_class import GeneralData
 
 
-class Actions(UserActions):
+class Actions(GeneralData):
     def get_users_action(self):
         """
         Эта функция позволяет выбрать тип действия для массива данных

@@ -4,10 +4,22 @@ import csv
 import json
 
 
-class Recorder:
+class RecorderMixin:
+    """..."""
+
+    def __write_to_json_file(self):
+        pass
+
+    def __write_to_csv_file(self):
+        pass
+
+    def __write_to_dict(self):
+        pass
+
     @staticmethod
     def record(data: list, name: str, record_type: str = "json"):
-        if record_type == "json":
+
+        if record_type == "json":  # def read_file()
             with open(f"text_files/{name.replace(' ', '_')}.json", "w", encoding="utf-8") as file:
                 to_write = json.dumps(data, indent=4, ensure_ascii=False)
                 file.write(to_write)
@@ -42,10 +54,12 @@ class Recorder:
             return
 
 
-class CompareVacations(GetRequest, Recorder, DataAnalise):
-    def __init__(self):
+class CompareVacations(RecorderMixin, DataAnalise):
+    """Получает два разных запроса и сравнивает между собой."""
+
+    def __init__(self, data):
         super().__init__()
-        self.data = GetRequest().get_data()
+        self.data = data
 
     def compare_by_param(self):
         """ Сортировка по тем или иным значениям """
@@ -108,6 +122,3 @@ class CompareVacations(GetRequest, Recorder, DataAnalise):
 
         self.record(top_data, self.request)
 
-
-cv = CompareVacations()
-cv.output_top()

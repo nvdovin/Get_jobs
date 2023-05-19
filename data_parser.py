@@ -103,31 +103,31 @@ class SuperJobParser(SuperJob):
         return total_data
 
 
-class GetRequest(SuperJobParser, HeadHunterParser):
-    """ Объединяющий класс для всех запросов"""
-    def __init__(self):
-        super().__init__(self)
-        self.request = input("Введите запрос: ")
-        self.sp = SuperJobParser(self.request)
-        self.hp = HeadHunterParser(self.request)
+class RequestInterface:  # RequestInterface
+    """Класс получения данных по API HH и SJ."""
 
-    @property
-    def platform(self):
-        platform = input("Выберите ресурс: hh, sj, либо нажмите на Enter для выбора всех платформ")
-        if platform == "hh":
-            return "hh"
-        elif platform == "sj":
-            return "sj"
+    def __init__(self):
+        super().__init__()
+        self.request = input("Введите запрос: ")
+        self.resource = input("Выберите ресурс: hh, sj, либо нажмите на Enter для выбора всех платформ")
+        self.platform = self.choose_platform()
+
+    def choose_platform(self):  # интерфейс
+        if self.resource == "hh" or self.resource == "sj":
+            return self.resource
         else:
             return "all"
 
-    def get_data(self):
+    def get_data(self) -> list:
         if self.platform == "hh":
-            return self.hp.get_parsed_dictionary()
+            return HeadHunterParser(self.request).get_parsed_dictionary()
         elif self.platform == "sj":
-            return self.sp.get_parsed_dictionary()
+            return SuperJobParser(self.request).get_parsed_dictionary()
         elif self.platform == "all":
-            return [self.hp.get_parsed_dictionary(), self.sp.get_parsed_dictionary()]
+            return [
+                HeadHunterParser(self.request).get_parsed_dictionary(),
+                SuperJobParser(self.request).get_parsed_dictionary()
+            ]
 
     def __str__(self):
         return f"Вывод распарсенных данных для последующего анализа"
