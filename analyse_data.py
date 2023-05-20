@@ -1,5 +1,5 @@
 from abstract_class import DataAnalise
-from data_parser import *
+from data_parser import RequestInterface
 import csv
 import json
 
@@ -54,8 +54,7 @@ class CompareVacations(RecorderMixIn, DataAnalise):
     emt - по занятости 
     none - без сортировки.
 """)
-        if type(self.data) is dict:
-            print("dictionary")
+        if len(self.data) > 2:
             if param in ["slr", "exp", "emt"]:
                 if param == "slr":
                     return sorted(self.data, key=lambda x: x["salary"], reverse=True)
@@ -68,6 +67,9 @@ class CompareVacations(RecorderMixIn, DataAnalise):
 
                 print(f'Нет параметра "{param}", попробуйте еще раз')
                 return self.data
+
+        elif len(self.data) == 0:
+            print("Вызов пуст")
 
         else:
             if param not in ["slr", "exp", "emt"]:
@@ -111,4 +113,4 @@ class CompareVacations(RecorderMixIn, DataAnalise):
             for i in range(top_size):
                 top_data.append(sorted_data[i])
 
-        self.write_to_json_file(top_data, "request")
+        self.write_to_json_file(top_data, "job_search")
