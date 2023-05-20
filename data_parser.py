@@ -109,7 +109,7 @@ class RequestInterface:  # RequestInterface
     def __init__(self):
         super().__init__()
         self.request = input("Введите запрос: ")
-        self.resource = input("Выберите ресурс: hh, sj, либо нажмите на Enter для выбора всех платформ")
+        self.resource = input("Выберите ресурс: hh, sj, либо нажмите на Enter для выбора всех платформ: ")
         self.platform = self.choose_platform()
 
     def choose_platform(self):  # интерфейс
@@ -118,7 +118,9 @@ class RequestInterface:  # RequestInterface
         else:
             return "all"
 
-    def get_data(self) -> list:
+    def get_data(self):
+        """ Возвращает либо спилок словарей, либо словарь с данными """
+
         if self.platform == "hh":
             return HeadHunterParser(self.request).get_parsed_dictionary()
         elif self.platform == "sj":
