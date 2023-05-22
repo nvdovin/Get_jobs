@@ -22,9 +22,3 @@ data = requests.post(
     get_request,
     params=params
 )
-
-api_data = {"access_token": "USERJQHVL7MH971Q2LQQKOP36UC605CFO5NAQF6IHMTFCSINK2JOCU5BVI845R7H",
-            "token_type": "bearer",
-            "refresh_token": "USERQSVSFON3Q3CUUN5V8TIQLV1E54V4EMD8LUJCTCEFO10EP2F2DCC7PQ7G67PF",
-            "expires_in": 1209599
-            }
