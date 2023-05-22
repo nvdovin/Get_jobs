@@ -6,3 +6,4 @@ if __name__ == "__main__":
     mn = CompareVacations(data)
     top_data = mn.output_top()
     mn.show_vacations_list()
+

@@ -133,6 +133,7 @@ exp - по опыту
 emt - по занятости
 Нажмите Enter для пропуска визуализации
 """)
+
         criterion = input("Ваш выбор: ")
 
         if criterion in ["slr", "exp", "emp"]:
