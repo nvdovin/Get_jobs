@@ -1,5 +1,6 @@
 from abstract_class import GeneralData
 import requests
+from config import SJ_API_KEY
 
 
 class HeadHunter(GeneralData):
@@ -24,7 +25,7 @@ class HeadHunter(GeneralData):
 class SuperJob(GeneralData):
     def __init__(self, keyword: str):
         self.keyword = keyword
-        self.secret_key = "v3.r.137548679.e52320967352ba00b5012258aae81413a76d0fbb.49831d30dacf09d700882a6b684a49a5d518d66e"
+        self.secret_key = SJ_API_KEY
 
     def get_main_data(self):
         data = requests.get(

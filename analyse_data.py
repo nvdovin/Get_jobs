@@ -44,6 +44,7 @@ class CompareVacations(RecorderMixIn, DataAnalise):
     def __init__(self, data):
         super().__init__()
         self.data = data
+        self.top_data = list
 
     def compare_by_param(self):
         """ Сортировка по тем или иным значениям """
@@ -104,7 +105,7 @@ class CompareVacations(RecorderMixIn, DataAnalise):
 
             second_length = len(sorted_data[1])
             if top_size > second_length:
-                top_size = second_length-1
+                top_size = second_length - 1
 
             for i in range(top_size):
                 top_data.append(sorted_data[1][i])
@@ -113,4 +114,33 @@ class CompareVacations(RecorderMixIn, DataAnalise):
             for i in range(top_size):
                 top_data.append(sorted_data[i])
 
+        self.top_data = top_data
         self.write_to_json_file(top_data, "job_search")
+
+    def show_by_criterion(self, criterion):
+        """ Визуализация по конкретному параметру """
+
+        for vacation in self.top_data:
+            print(f"{vacation['title']} - {vacation[criterion]}")
+
+    def show_vacations_list(self):
+        """ Выводим список вакансий по определенному критерию """
+
+        print(f"""Для вывода вакансий по критериям, введите ниже критерий:
+        
+slr - по зарплата
+exp - по опыту
+emt - по занятости
+Нажмите Enter для пропуска визуализации
+""")
+        criterion = input("Ваш выбор: ")
+
+        if criterion in ["slr", "exp", "emp"]:
+            if criterion == "slr":
+                self.show_by_criterion("salary")
+            elif criterion == "exp":
+                self.show_by_criterion("experience")
+            elif criterion == "emt":
+                self.show_by_criterion("employment")
+            else:
+                print("Вы выбрали вариант без визуализации. ")
